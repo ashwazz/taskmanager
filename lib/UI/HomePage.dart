@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors, library_private_types_in_public_api, prefer_typing_uninitialized_variables, duplicate_ignore
+
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -10,6 +11,7 @@ import 'package:taskmanager/services/theme_services.dart';
 import 'package:get/get.dart';
 import '../services/notification_services.dart';
 import 'theme.dart';
+
 
 
 
@@ -76,8 +78,10 @@ class _HomePageState extends State<HomePage> {
                 child: MyButton(
                  label: "+add task ",
                  
-                 onTap: ()=>Get.to(AddTaskPage()),
-              )
+                 onTap: (){
+                  Navigator.pushNamed(context, '/addTask');
+                 },
+                )
               ),
             ],
           ),
@@ -141,7 +145,7 @@ class _HomePageState extends State<HomePage> {
     return AppBar(
       elevation: 3,
       toolbarHeight: 55,
-      backgroundColor: context.theme.backgroundColor,
+      backgroundColor: context.theme.colorScheme.background,
       // ignore: duplicate_ignore, duplicate_ignore
       leading: GestureDetector(
         onTap: () {

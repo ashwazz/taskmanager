@@ -4,6 +4,7 @@ import 'package:taskmanager/services/theme_services.dart';
 import 'package:get_storage/get_storage.dart';
 import 'UI/theme.dart';
 import 'package:get/get.dart';
+import 'package:taskmanager/UI/add_task_bar.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +26,12 @@ class MyApp extends StatelessWidget {
       theme: Themes.light1,
       darkTheme: Themes.dark1,
       themeMode: ThemeService().theme,
-      home: HomePage(),
+      home: const HomePage(),
+       routes: {
+    '/addTask': (context) => AddTaskPage(),
+    '/homepage': (context) => HomePage(),
+
+  },
     );
   }
 }

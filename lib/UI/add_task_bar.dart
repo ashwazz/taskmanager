@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../services/theme_services.dart';
+import 'package:taskmanager/UI/widgets/button.dart';
+
 
 class AddTaskPage extends StatelessWidget {
   // ignore: non_constant_identifier_names
@@ -12,17 +14,28 @@ class AddTaskPage extends StatelessWidget {
       appBar: _appbar1(context),
       body:Column(
         children: [
-          Container()
+           Container(
+            height: 100,
+                  width: 75,
+            child: MyButton(
+                 label: "+add task ",
+                 
+                 onTap: (){
+                  Navigator.pushNamed(context, '/homepage');
+                 },
+           ),
+          )
         ],
       )
     );
   }
     _appbar1(BuildContext context) {
+    
     return AppBar(
       elevation: 3,
       toolbarHeight: 55,
-      backgroundColor: context.theme.backgroundColor,
-      // ignore: duplicate_ignore, duplicate_ignore
+      backgroundColor: context.theme.colorScheme.background,
+      // ignore: duplicate_ignore
       leading: GestureDetector(
         onTap: () {
           // ignore: avoid_print
@@ -34,7 +47,7 @@ class AddTaskPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(15.0, 0, 0, 0),
           child: Icon(
-            Get.isDarkMode ? Icons.light_mode : Icons.night_shelter,
+            Get.isDarkMode ? Icons.light_mode : Icons.nights_stay_sharp,
             size: 30,
           ),
         ),
