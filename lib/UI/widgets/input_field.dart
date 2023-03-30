@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:taskmanager/UI/theme.dart';
 
 class MyInputField extends StatelessWidget {
@@ -25,12 +27,43 @@ class MyInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Column(
-        children: [
-
-          Text(
-            title,
-            style: HeadingStyle,
+       children: [
+        
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 10, 280, 0),
+            child: Text(
+              title,
+              textAlign: TextAlign.start,
+              style:  TextStyle(
+                color: Get.isDarkMode
+                        ? Colors.grey.shade50
+                        : Colors.grey.shade800, 
+                fontSize: 15,
+                fontWeight: FontWeight.bold
+          
+              ),
+            ),
           ),
+         const SizedBox(
+            height: 5,
+          ),
+          Container(
+            height: 40,
+            width: 330,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Get.isDarkMode
+                        ? Colors.grey.shade50
+                        : Colors.grey.shade800,
+                width:1.5
+      
+              ),
+              borderRadius: BorderRadius.circular(12),
+
+            ),
+
+            
+          )
         ],
 
       ),

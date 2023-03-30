@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../services/theme_services.dart';
 import 'package:taskmanager/UI/widgets/button.dart';
+import 'package:taskmanager/UI/theme.dart';
+import 'package:taskmanager/UI/widgets/input_field.dart';
 
 
 class AddTaskPage extends StatelessWidget {
@@ -13,20 +15,38 @@ class AddTaskPage extends StatelessWidget {
     return Scaffold(
       appBar: _appbar1(context),
       body:Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        
         children: [
-           Container(
-            height: 100,
-            width: 75,
-            child: MyButton(
-                 label: "+add task ",
-                 
-                 onTap: (){
-                  Navigator.pushNamed(context, '/homepage');
-                 },
-           ),
-          )
+         const SizedBox(
+             height: 30,
+              width: 20,
+          ),
+          Row(
+            children: [
+            //   const SizedBox(
+            //  height: 20,
+            //   width: 20,),
+              Container(
+                height: 45,
+                width: 150,
+                child:
+                const Text("ADD TASK",
+                textAlign: TextAlign.center, // aligns the text
+                 style: TextStyle(
+                  
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic
+                  
+                 ),
+                ),
+              
+              ),
+            ],
+          ),
+            MyInputField(title: "Title", hint:" enter your title"),
         ],
+        
       )
     );
   }
@@ -56,7 +76,7 @@ class AddTaskPage extends StatelessWidget {
       // ignore: prefer_const_literals_to_create_immutables
       actions: [
         // isDarkMode?
-        ClipRRect(
+        const ClipRRect(
           child: CircleAvatar(
             radius: 25,
             backgroundColor: Colors.white,
@@ -64,7 +84,7 @@ class AddTaskPage extends StatelessWidget {
           ),
         ),
 
-        SizedBox(
+       const  SizedBox(
           width: 20,
         ),
       ],
