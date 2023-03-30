@@ -5,14 +5,14 @@ import 'package:get_storage/get_storage.dart';
 import 'UI/theme.dart';
 import 'package:get/get.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
-  
-  runApp( MyApp());
+
+  runApp(MyApp());
 }
 
+// for null safety errors , by keeping a ? ahead of a variable u can tell compiler value might be null
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
@@ -21,14 +21,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
-     debugShowCheckedModeBanner: false,
-      theme:Themes.light1,
+      debugShowCheckedModeBanner: false,
+      theme: Themes.light1,
       darkTheme: Themes.dark1,
       themeMode: ThemeService().theme,
-      
-      
       home: HomePage(),
     );
   }
 }
-
