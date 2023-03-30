@@ -16,7 +16,7 @@ class AddTaskPage extends StatelessWidget {
         children: [
            Container(
             height: 100,
-                  width: 75,
+            width: 75,
             child: MyButton(
                  label: "+add task ",
                  
