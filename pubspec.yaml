@@ -43,7 +43,7 @@ dependencies:
   invert_colors:
   intl: #helps us with time formats 
   google_fonts:
-  
+  date_picker_timeline:
 dev_dependencies:
   flutter_test:
     sdk: flutter
