@@ -13,6 +13,7 @@ class AddTaskPage extends StatelessWidget {
     return Scaffold(
       appBar: _appbar1(context),
       body:Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
            Container(
             height: 100,
