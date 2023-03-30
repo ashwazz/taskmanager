@@ -12,7 +12,7 @@ Future<void> main() async {
   
   runApp( MyApp());
 }
-
+// for null safety errors , by keeping a ? ahead of a variable u can tell compiler value might be null
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
