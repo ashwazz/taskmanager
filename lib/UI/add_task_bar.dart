@@ -30,6 +30,7 @@ class AddTaskPage extends StatelessWidget {
       )
     );
   }
+
     _appbar1(BuildContext context) {
     
     return AppBar(

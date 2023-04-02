@@ -163,6 +163,9 @@ class _HomePageState extends State<HomePage> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(15.0, 0, 0, 0),
           child: Icon(
+            color:Get.isDarkMode
+                      ?Colors.grey.shade50
+                      :Colors.grey.shade800,
             Get.isDarkMode ? Icons.light_mode : Icons.nights_stay_sharp,
             size: 30,
           ),
