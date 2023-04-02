@@ -67,3 +67,19 @@ TextStyle get HeadingStyle{
           )
         );
       }
+TextStyle get SubTitleStyle{
+
+        return GoogleFonts.lato(
+          textStyle:  TextStyle(
+            
+            fontSize: 16,
+            //fontWeight: FontWeight.bold,
+            color: Get.isDarkMode
+                        ? Colors.grey.shade50
+                        : Colors.grey.shade800, 
+            
+            
+          )
+        );
+      }
+      

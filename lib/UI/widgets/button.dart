@@ -21,13 +21,14 @@ class MyButton extends StatelessWidget {
         height: 55, 
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: Get.isDarkMode ?Colors.grey.shade400:Colors.grey.shade100,
+          color: Get.isDarkMode ?Colors.grey.shade400:Color.fromARGB(255, 72, 71, 77),
         ),
         child: Center(
           child: Text(
             label,
             style:TextStyle(
-              color: Colors.black,
+              color: Color.fromARGB(255, 255, 255, 255),
+              fontWeight: FontWeight.w600,
               
             )
           ),

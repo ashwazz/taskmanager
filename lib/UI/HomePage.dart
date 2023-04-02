@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, library_private_types_in_public_api, prefer_typing_uninitialized_variables, duplicate_ignore
 
+
+
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -13,7 +15,7 @@ import '../services/notification_services.dart';
 import 'theme.dart';
 
 
-
+  
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -26,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   var notifyHelper;
   DateTime _selectedDate= DateTime.now() ;
 
-  get isDarkMode => null;
+  get  isDarkMode => null;
 
   @override
   void initState() {
@@ -74,11 +76,13 @@ class _HomePageState extends State<HomePage> {
 
               // button /button / button
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: MyButton(
-                 label: "+add task ",
+                 label: " ADD TASK ",
+                 
                  
                  onTap: (){
+                
                   Navigator.pushNamed(context, '/addTask');
                  },
                 )
@@ -96,10 +100,8 @@ class _HomePageState extends State<HomePage> {
                   height: 100,
                   width: 75,
                   initialSelectedDate: DateTime.now(),
-                  selectionColor: Get.isDarkMode
-                      ? Colors.blue.shade300
-                      : Colors.blue.shade500,
-                  selectedTextColor: Colors.black,
+                  selectionColor: Get.isDarkMode ? Colors.grey.shade600:Color.fromARGB(255, 242, 216, 202),
+                  selectedTextColor:  Get.isDarkMode? Color.fromARGB(255, 247, 247, 246):Colors.black,
                   dateTextStyle: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
@@ -141,23 +143,27 @@ class _HomePageState extends State<HomePage> {
     return Container();
   }
   
+  @override
   _appbar() {
     return AppBar(
       elevation: 3,
       toolbarHeight: 55,
-      backgroundColor: context.theme.colorScheme.background,
+      backgroundColor: Get.isDarkMode ? Colors.grey.shade600:Color.fromARGB(255, 253, 248, 233),
       // ignore: duplicate_ignore, duplicate_ignore
       leading: GestureDetector(
         onTap: () {
           // ignore: avoid_print
           print('tapped');
-          ThemeService().switchtheme();
-          notifyHelper.displayNotification(
-              title: "Theme Changed",
-              body: Get.isDarkMode
-                  ? "activated light theme"
-                  : "Activated Dark Theme");
-          notifyHelper.scheduledNotification();
+          // setState(() {});
+           ThemeService().switchtheme();
+          setState(() {});
+          
+          // notifyHelper.displayNotification(
+          //     title: "Theme Changed",
+          //     body:Get.isDarkMode
+          //         ? "activated light theme"
+          //         : "Activated Dark Theme");
+          // notifyHelper.scheduledNotification();
         },
         // ignore: prefer_const_constructors
         child: Padding(
