@@ -50,6 +50,7 @@ class MyInputField extends StatelessWidget {
           Container(
             height: 40,
             width: 330,
+            padding: const EdgeInsets.symmetric(vertical:0,horizontal: 5),
             decoration: BoxDecoration(
               border: Border.all(
                 color: Get.isDarkMode
@@ -65,15 +66,35 @@ class MyInputField extends StatelessWidget {
               children: [
                 Expanded(
                   child: TextFormField(
-                    
-                  )
+                    readOnly: widget==null?false:true ,
+                    autofocus: true,
+                    autocorrect: true,
+                    cursorColor:Get.isDarkMode
+                        ? Colors.grey.shade50
+                        : Colors.grey.shade800, 
+                    controller: controller,
+                    style: SubTitleStyle,
+                    decoration: InputDecoration(
+                      
+
+                      hintText: hint,
+                      hintStyle: SubTitleStyle,
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: context.theme.colorScheme.background,
+                          width: 0,
+                        ),
+                      ),
+                    ),
+                  ),
                 
-                )
+                ),
+                widget==null?Container():Container(child:widget ,)
               ],
             ),
 
 
-          )
+          ),
         ],
 
       ),
