@@ -80,10 +80,17 @@ class _HomePageState extends State<HomePage> {
                 child: MyButton(
                  label: " ADD TASK ",
                  
-                 
-                 onTap: (){
+                 //async is extra 
+                 // refresh , flag in add task bar 
+                 onTap: ()async{
                 
-                  Navigator.pushNamed(context, '/addTask');
+                 int? refresh = await Navigator.pushNamed(context, '/addTask');
+                 if (refresh == 1){
+                  Get.isDarkMode?null:ThemeService().switchtheme();
+                    
+                 }else{
+                  Get.isDarkMode?ThemeService().switchtheme():null;
+                 }
                  },
                 )
               ),
