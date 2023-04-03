@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_const_constructors, library_private_types_in_public_api, prefer_typing_uninitialized_variables, duplicate_ignore
 
-
-
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -18,7 +16,7 @@ import 'theme.dart';
   
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+   HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -27,23 +25,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var notifyHelper;
   DateTime _selectedDate= DateTime.now() ;
-
-  get  isDarkMode => null;
-
-  @override
+ @override
+  get  isDarkMode => false;
   void initState() {
     // to : implement init State
     super.initState();
     notifyHelper = NotifyHelper();
     notifyHelper.initializeNotification();
     notifyHelper.requestIOSPermissions();
+   
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Get.isDarkMode ? Colors.grey.shade800 : Colors.white,
-      appBar: _appbar(),
+      appBar: _appbar(context),
       body: Column(
         // ignore: prefer_const_literals_to_create_immutables
         children: [
@@ -82,15 +79,38 @@ class _HomePageState extends State<HomePage> {
                  
                  //async is extra 
                  // refresh , flag in add task bar 
+                 //https://stackoverflow.com/questions/53077273/flutter-return-data-from-a-screen-error-with-pushnamed
                  onTap: ()async{
                 
-                 int? refresh = await Navigator.pushNamed(context, '/addTask');
+                final refresh = await Navigator.of(context).pushNamed("/addTask") as int?;
+                  print(refresh);
+                  setState(() {
+                    Get.isDarkMode;
+                  });
                  if (refresh == 1){
-                  Get.isDarkMode?null:ThemeService().switchtheme();
+                  if(Get.isDarkMode == true){
+                    //return null;
+                  }
+                  else{
+                    ThemeService().switchtheme();
                     
-                 }else{
-                  Get.isDarkMode?ThemeService().switchtheme():null;
+
+                  }
+                    //Get.isDarkMode?ThemeService().switchtheme():null; 
                  }
+                 else
+                 {
+                 if(Get.isDarkMode == true){
+                    ThemeService().switchtheme();
+                   
+                  }
+                  else{
+                    //return null;
+
+                  }
+                 }
+               
+                
                  },
                 )
               ),
@@ -99,16 +119,25 @@ class _HomePageState extends State<HomePage> {
           Column(
             // date picker
             children: [
-              _addDateBar(),
+              _addDateBar(
+                
+              ),
+              
               Container(
                 margin: const EdgeInsets.only(top: 20),
-                child: DatePicker(
+              
+                child: 
+                StatefulBuilder(
+  builder: (BuildContext context, StateSetter setState) {
+                return DatePicker(
+                  
                   DateTime.now(),
                   height: 100,
                   width: 75,
                   initialSelectedDate: DateTime.now(),
+                  
                   selectionColor: Get.isDarkMode ? Colors.grey.shade600:Color.fromARGB(255, 242, 216, 202),
-                  selectedTextColor:  Get.isDarkMode? Color.fromARGB(255, 247, 247, 246):Colors.black,
+                  selectedTextColor:  Get.isDarkMode? Colors.white:Colors.black,
                   dateTextStyle: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
@@ -138,7 +167,9 @@ class _HomePageState extends State<HomePage> {
                   
                   },
 
-                ),
+                );
+                },
+                ),// this is the date picker
               ),
             ],
           ),
@@ -149,9 +180,10 @@ class _HomePageState extends State<HomePage> {
   _addDateBar(){
     return Container();
   }
-  
+ 
+  }
   @override
-  _appbar() {
+PreferredSizeWidget? implements; AppBar _appbar(BuildContext context) {
     return AppBar(
       elevation: 3,
       toolbarHeight: 55,
@@ -159,11 +191,19 @@ class _HomePageState extends State<HomePage> {
       // ignore: duplicate_ignore, duplicate_ignore
       leading: GestureDetector(
         onTap: () {
+            
           // ignore: avoid_print
           print('tapped');
-          // setState(() {});
-           ThemeService().switchtheme();
-          setState(() {});
+        
+          
+          ThemeService().switchtheme();
+      Navigator.pushAndRemoveUntil(
+        context,
+    MaterialPageRoute(builder: (context) =>  HomePage(), ), 
+    (Route<dynamic> route) => false,
+);
+          
+          
           
           // notifyHelper.displayNotification(
           //     title: "Theme Changed",
@@ -201,4 +241,4 @@ class _HomePageState extends State<HomePage> {
       ],
     );
   }
-}
+

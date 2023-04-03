@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: Themes.light1,
       darkTheme: Themes.dark1,
       themeMode: ThemeService().theme,
-      home: const HomePage(),
+      home:  HomePage(),
        routes: {
     '/addTask': (context) => AddTaskPage(),
     '/homepage': (context) => HomePage(),

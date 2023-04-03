@@ -46,7 +46,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                  onTap: (){
                   
                 // we changed from push named to pop , and passed flag 
-                  Navigator.pop(context, flag);
+                  Navigator.pop(context, 
+                  Get.isDarkMode?1:0);
                  },
                 )
                 // const Text("ADD TASK",
@@ -98,14 +99,14 @@ class _AddTaskPageState extends State<AddTaskPage> {
         onTap: () {
           // ignore: avoid_print
           print('tapped');
-          // setState(() {});
+         // setState(() {});
           ThemeService().switchtheme();
-          if(flag == 0){
-            flag = 1 ;  // theme changed to dark
-          }
-          else{
-            flag = 0 ;  // theme changed to white
-          }
+          // if(flag == 0){
+          //   flag = 1 ;  // theme changed to dark
+          // }
+          // else{
+          //   flag = 0 ;  // theme changed to white
+          // }
           
         },
         // ignore: prefer_const_constructors
