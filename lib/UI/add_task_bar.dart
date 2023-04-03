@@ -18,7 +18,7 @@ class AddTaskPage extends StatefulWidget {
 
 class _AddTaskPageState extends State<AddTaskPage> {
   final DateTime _selectedDate =DateTime.now();
-    
+  int flag = 0; // to check if theme has changed 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,8 +44,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
                  
                  
                  onTap: (){
-                
-                  Navigator.pushNamed(context, '/homepage');
+                  
+                // we changed from push named to pop , and passed flag 
+                  Navigator.pop(context, flag);
                  },
                 )
                 // const Text("ADD TASK",
@@ -99,6 +100,12 @@ class _AddTaskPageState extends State<AddTaskPage> {
           print('tapped');
           // setState(() {});
           ThemeService().switchtheme();
+          if(flag == 0){
+            flag = 1 ;  // theme changed to dark
+          }
+          else{
+            flag = 0 ;  // theme changed to white
+          }
           
         },
         // ignore: prefer_const_constructors
