@@ -30,18 +30,29 @@ class MyInputField extends StatelessWidget {
        children: [
         
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 10, 280, 0),
-            child: Text(
-              title,
-              textAlign: TextAlign.start,
-              style:  TextStyle(
-                color: Get.isDarkMode
-                        ? Colors.grey.shade50
-                        : Colors.grey.shade800, 
-                fontSize: 15,
-                fontWeight: FontWeight.bold
-          
-              ),
+            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+            child: Row(
+              children: [
+                
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20,0,0,0),
+                  child: Text(
+                    // textDirection: TextDirection.ltr,
+                    title,
+                    textAlign: TextAlign.start,
+                  
+                    //maxLines:1,
+                    style:  TextStyle(
+                      color: Get.isDarkMode
+                              ? Colors.grey.shade50
+                              : Colors.grey.shade800, 
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold
+                          
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
          const SizedBox(

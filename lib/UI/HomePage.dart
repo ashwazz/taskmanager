@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
 
               // button /button / button
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: MyButton(
                  label: " ADD TASK ",
                  
@@ -108,6 +108,9 @@ class _HomePageState extends State<HomePage> {
                     //return null;
 
                   }
+                  setState(() {
+                    Get.isDarkMode;
+                  });
                  }
                
                 
@@ -197,10 +200,11 @@ PreferredSizeWidget? implements; AppBar _appbar(BuildContext context) {
         
           
           ThemeService().switchtheme();
-      Navigator.pushAndRemoveUntil(
+          
+      Navigator.pushAndRemoveUntil(   //this is for refreshing page 
         context,
     MaterialPageRoute(builder: (context) =>  HomePage(), ), 
-    (Route<dynamic> route) => false,
+    (Route<dynamic> route) => true,
 );
           
           

@@ -7,99 +7,135 @@ import 'package:taskmanager/UI/theme.dart';
 import 'package:taskmanager/UI/widgets/input_field.dart';
 import 'package:get_storage/get_storage.dart';
 
-
 class AddTaskPage extends StatefulWidget {
   // ignore: non_constant_identifier_names
-  const AddTaskPage({Key? Key}): super(key: Key);
+  const AddTaskPage({Key? Key}) : super(key: Key);
 
   @override
   State<AddTaskPage> createState() => _AddTaskPageState();
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
-  final DateTime _selectedDate =DateTime.now();
-  int flag = 0; // to check if theme has changed 
+  DateTime _selectedDate = DateTime.now();
+  String _starttime = DateFormat("hh:mm a").format(DateTime.now()).toString();
+  String _endtime = "9:30 pm";
+  int flag = 0; // to check if theme has changed
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appbar1(context),
-      body:Column(
-    
-        children: [
-         const SizedBox(
-             height: 30,
+        appBar: _appbar1(context),
+        body: SingleChildScrollView(
+          child: Column(children: [
+            const SizedBox(
+              height: 30,
               width: 20,
-          ),
-          Row(
-            children: [
-              const SizedBox(
-             height: 0,
-              width: 8,),
-              Container(
-                height: 45,
-                width: 150,
-                child:
-                MyButton(
-                 label: " ADD TASK ",
-                 
-                 
-                 onTap: (){
-                  
-                // we changed from push named to pop , and passed flag 
-                  Navigator.pop(context, 
-                  Get.isDarkMode?1:0);
-                 },
-                )
-                // const Text("ADD TASK",
-                // textAlign: TextAlign.center, // aligns the text
-                //  style: TextStyle(
-                  
-                //   fontSize: 25,
-                //   fontWeight: FontWeight.bold,
-                //   fontStyle: FontStyle.italic
-                  
-                //  ),
-                // ),
-              
-              ),
-            ],
-          ),
-             MyInputField(title: "Title", hint:" enter your title"),
-             MyInputField(title: "Note", hint:" enter your Note"),
-             MyInputField(title: "Date", hint:DateFormat.yMd().format(_selectedDate),
-             widget: IconButton(
-              icon: Icon(Icons.calendar_month_outlined,
-              color:Get.isDarkMode
-                        ? Colors.grey.shade50
-                        : Colors.grey.shade800,  ),
-              onPressed: (){
-                //print("hi there");
-                _getDateFromUser();
-
-
-              },
-             ),
-             ),
-        ]
+            ),
+            Row(
+              children: [
+                const SizedBox(
+                  height: 0,
+                  width: 8,
+                ),
+                Container(
+                    height: 45,
+                    width: 150,
+                    child: MyButton(
+                      label: " ADD TASK ",
+                      onTap: () {
+                        // we changed from push named to pop , and passed flag
+                        Navigator.pop(context, Get.isDarkMode ? 1 : 0);
+                      },
+                    )
+                    // const Text("ADD TASK",
+                    // textAlign: TextAlign.center, // aligns the text
+                    //  style: TextStyle(
         
-      )
-    );
+                    //   fontSize: 25,
+                    //   fontWeight: FontWeight.bold,
+                    //   fontStyle: FontStyle.italic
+        
+                    //  ),
+                    // ),
+        
+                    ),
+              ],
+            ),
+            MyInputField(title: "Title", hint: " enter your title"),
+            MyInputField(title: "Note", hint: " enter your Note"),
+            MyInputField(
+              title: "Date",
+              hint: DateFormat.yMd().format(_selectedDate),
+              widget: IconButton(
+                icon: Icon(
+                  Icons.calendar_month_outlined,
+                  color:
+                      Get.isDarkMode ? Colors.grey.shade50 : Colors.grey.shade800,
+                ),
+                onPressed: () {
+                  //print("hi there");
+                  _getDateFromUser();
+                },
+              ),
+            ),
+            SizedBox(height: 5),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  constraints: BoxConstraints(maxWidth: 160, minWidth: 50),
+                  child: MyInputField(
+                    title:
+                        "StartTime", // Set the text to display from left to right
+                
+                    hint: _starttime,
+                    widget: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.access_time_rounded,
+                        color: Get.isDarkMode
+                            ? Colors.grey.shade50
+                            : Colors.grey.shade800,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 12),
+                Container(
+                  constraints: BoxConstraints(maxWidth:160, minWidth: 50),
+                  child: MyInputField(
+                    title: "Start Time",
+                    hint: _starttime,
+                    widget: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.access_time_rounded,
+                        color: Get.isDarkMode
+                            ? Colors.grey.shade50
+                            : Colors.grey.shade800,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 120),
+          ]),
+        ));
   }
 
-  
-   PreferredSizeWidget? _appbar1(BuildContext context) {
-    
-
+  PreferredSizeWidget? _appbar1(BuildContext context) {
     return AppBar(
       elevation: 3,
       toolbarHeight: 55,
-      backgroundColor: Get.isDarkMode ? Colors.grey.shade600:Color.fromARGB(255, 253, 248, 233),
+      backgroundColor: Get.isDarkMode
+          ? Colors.grey.shade600
+          : Color.fromARGB(255, 253, 248, 233),
       // ignore: duplicate_ignore
       leading: GestureDetector(
         onTap: () {
           // ignore: avoid_print
           print('tapped');
-         // setState(() {});
+          // setState(() {});
           ThemeService().switchtheme();
           // if(flag == 0){
           //   flag = 1 ;  // theme changed to dark
@@ -107,13 +143,12 @@ class _AddTaskPageState extends State<AddTaskPage> {
           // else{
           //   flag = 0 ;  // theme changed to white
           // }
-          
         },
         // ignore: prefer_const_constructors
         child: Padding(
           padding: const EdgeInsets.fromLTRB(15.0, 0, 0, 0),
           child: Icon(
-            Get.isDarkMode? Icons.light_mode : Icons.nights_stay_sharp,
+            Get.isDarkMode ? Icons.light_mode : Icons.nights_stay_sharp,
             size: 30,
           ),
         ),
@@ -129,7 +164,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
           ),
         ),
 
-       const  SizedBox(
+        const SizedBox(
           width: 20,
         ),
       ],
@@ -153,7 +188,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
 // class _AddTaskPageState extends State<AddTaskPage> {
 //   final DateTime _selectedDate =DateTime.now();
-    
+
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
@@ -243,13 +278,19 @@ class _AddTaskPageState extends State<AddTaskPage> {
 //         SizedBox(width: 20),
 //       ],
 //     );
-//   }
-
-  _getDateFromUser()async {
-    DateTime? _PickerDate = await showDatePicker(context: context,
-     
-     initialDate: DateTime.now(),
-     firstDate: DateTime(2015), 
-     lastDate: DateTime(2100));
+//}
+  _getDateFromUser() async {
+    DateTime? _PickerDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2015),
+        lastDate: DateTime(2100));
+    if (_PickerDate != null) {
+      setState(() {
+        _selectedDate = _PickerDate;
+      });
+    } else {
+      print("entered date is null");
+    }
   }
 }
