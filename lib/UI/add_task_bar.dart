@@ -16,6 +16,9 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
+  final TextEditingController _titlecontroller = TextEditingController();
+  final TextEditingController _notecontroller = TextEditingController();
+
   DateTime _selectedDate = DateTime.now();
   String _starttime = DateFormat("hh:mm a").format(DateTime.now()).toString();
   String _endtime = "9:30 pm";
@@ -74,8 +77,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     ),
               ],
             ),
-            MyInputField(title: "Title", hint: " enter your title"),
-            MyInputField(title: "Note", hint: " enter your Note"),
+            MyInputField(title: "Title", hint: " enter your title", controller: _titlecontroller,),
+            MyInputField(title: "Note", hint: " enter your Note",controller: _notecontroller,),
             MyInputField(
               title: "Date",
               hint: DateFormat.yMd().format(_selectedDate),
@@ -199,6 +202,31 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 ).toList(),
              ),
              ) , 
+             const SizedBox(height: 20),
+             // ADDS THE TASK ON TO THE HOME PAGE SCREEN 
+            Row(
+             mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: CircleAvatar(
+                   radius: 25,
+                   backgroundColor: Get.isDarkMode
+                               ? Colors.grey.shade50
+                               : Colors.grey.shade800,
+                    child: Center(
+                      child: IconButton(onPressed:()=>_validateDate(), icon: Icon(
+                       Icons.add,
+                       size: 35,
+                       color: Get.isDarkMode
+                                 ? Colors.grey.shade800
+                                 : Colors.grey.shade50,
+                      )),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             const SizedBox(height: 120),
           ]),
         ));
@@ -216,7 +244,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
         onTap: () {
           // ignore: avoid_print
           print('tapped');
-          // setState(() {});
+          setState(() {
+            Get.isDarkMode;
+          });
           ThemeService().switchtheme();
           // if(flag == 0){
           //   flag = 1 ;  // theme changed to dark
@@ -250,6 +280,23 @@ class _AddTaskPageState extends State<AddTaskPage> {
         ),
       ],
     );
+  }
+  _validateDate(){
+    if(_notecontroller.text.isNotEmpty&&_titlecontroller.text.isNotEmpty){
+        // add it to databse 
+       Navigator.pop(context, Get.isDarkMode ? 1 : 0);
+    }
+    else if(_notecontroller.text.isEmpty||_titlecontroller.text.isEmpty){
+      Get.snackbar("REQUIRED", " All Fields Required ",
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Get.isDarkMode
+          ? Colors.grey.shade600
+          : Color.fromARGB(255, 253, 248, 233),
+      icon: Icon(Icons.warning_amber_rounded),
+);
+      
+    }
+
   }
 
   _getDateFromUser() async {

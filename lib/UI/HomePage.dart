@@ -13,6 +13,7 @@ import '../services/notification_services.dart';
 import 'theme.dart';
 
 
+
   
 
 class HomePage extends StatefulWidget {
@@ -193,10 +194,12 @@ PreferredSizeWidget? implements; AppBar _appbar(BuildContext context) {
       backgroundColor: Get.isDarkMode ? Colors.grey.shade600:Color.fromARGB(255, 253, 248, 233),
       // ignore: duplicate_ignore, duplicate_ignore
       leading: GestureDetector(
-        onTap: () {
-            
+        onTap:(){
+          // setState(() {
+          //   Get.isDarkMode;
+          // })
           // ignore: avoid_print
-          print('tapped');
+          // print('tapped');
         
           
           ThemeService().switchtheme();
