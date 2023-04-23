@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:taskmanager/controllers/task_controller.dart';
+import 'package:taskmanager/models/task.dart';
 import '../services/theme_services.dart';
 import 'package:taskmanager/UI/widgets/button.dart';
 import 'package:taskmanager/UI/theme.dart';
@@ -16,6 +18,7 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
+  final TaskController _taskController = Get.put(TaskController());
   final TextEditingController _titlecontroller = TextEditingController();
   final TextEditingController _notecontroller = TextEditingController();
 
@@ -283,7 +286,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
   }
   _validateDate(){
     if(_notecontroller.text.isNotEmpty&&_titlecontroller.text.isNotEmpty){
-        // add it to databse 
+      _addTaskToDb();
        Navigator.pop(context, Get.isDarkMode ? 1 : 0);
     }
     else if(_notecontroller.text.isEmpty||_titlecontroller.text.isEmpty){
@@ -298,7 +301,23 @@ class _AddTaskPageState extends State<AddTaskPage> {
     }
 
   }
-
+  _addTaskToDb() async {
+  int value = await _taskController.addTask(
+     task : Task(
+      note: _notecontroller.text,
+      title: _titlecontroller.text,
+      date: DateFormat.yMd().format(_selectedDate),
+      startTime: _starttime,
+      endTime: _endtime,
+      remind: _selectedremind,
+      repeat: _selectedRepeat,
+      isCompleted: 0,
+    ),
+   );
+   print("MY ID IS "+"$value");
+   
+     
+  }
   _getDateFromUser() async {
     DateTime? _PickerDate = await showDatePicker(
         context: context,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskmanager/DB/db_helper.dart';
 import 'package:taskmanager/UI/HomePage.dart';
 import 'package:taskmanager/services/theme_services.dart';
 import 'package:get_storage/get_storage.dart';
@@ -8,6 +9,7 @@ import 'package:taskmanager/UI/add_task_bar.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await DBHelper.initDB();
   await GetStorage.init();
 
   runApp(MyApp());
