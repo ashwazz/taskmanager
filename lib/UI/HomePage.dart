@@ -7,6 +7,7 @@ import 'package:invert_colors/invert_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:taskmanager/UI/add_task_bar.dart';
 import 'package:taskmanager/UI/widgets/button.dart';
+import 'package:taskmanager/controllers/task_controller.dart';
 import 'package:taskmanager/services/theme_services.dart';
 import 'package:get/get.dart';
 import '../services/notification_services.dart';
@@ -26,6 +27,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var notifyHelper;
   DateTime _selectedDate= DateTime.now() ;
+  final _taskController = Get.put(TaskController());
  @override
   get  isDarkMode => false;
   void initState() {
@@ -84,8 +86,10 @@ class _HomePageState extends State<HomePage> {
                  onTap: ()async{
                 
                 final refresh = await Navigator.of(context).pushNamed("/addTask") as int?;
+                _taskController.getTasks();
                   print(refresh);
                   setState(() {
+                    refresh;
                     Get.isDarkMode;
                   });
                  if (refresh == 1){
@@ -177,10 +181,36 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
+          //more children 
+
+          _showTasks(),
         ],
       ),
     );
   }
+ _showTasks(){
+  return Expanded(
+    child: Obx((){
+      return ListView.builder(
+        itemCount: _taskController.taskList.length,
+        itemBuilder: (_,index){
+        print(_taskController.taskList.length);
+        return Container(
+          width: 100,
+          height: 50,
+          color: Color.fromARGB(255, 169, 166, 160),
+          margin: const EdgeInsets.all(5),
+          child: Text(
+            _taskController.taskList[index].title.toString()
+          ),
+        );  
+      }); 
+    }),
+  );
+
+   
+ }
+
   _addDateBar(){
     return Container();
   }
